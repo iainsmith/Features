@@ -3,15 +3,24 @@
         "name": "Red controller",
         "active": true,
         "percentage": 60,
-        "platforms" : "iPhone"
+        "platforms" : "iPhone",
+        "section" : "controllers"
     },
     {
         "Name": "Yellow controller",
-        "active": false
+        "active": false,
+        "section" : "controllers"
     },
     {
         "name": "Green controller",
         "active": true,
-        "platforms": "iphone,ipad"
+        "platforms": "iphone,ipad",
+        "section" : "controllers"
+    },
+    {
+        "name": "New Table Styles",
+        "active": true,
+        "platforms": "iphone",
+        "section" : "views"
     }
 ]

@@ -26,6 +26,7 @@ internal struct FeatureParser {
         let platformKey = "platforms"
         let nameKey = "name"
         let activeKey = "active"
+        let sectionKey = "section"
 
         var lowerCaseDictionary = dictionary
         lowerCaseDictionary.lowercaseKeys()
@@ -45,6 +46,11 @@ internal struct FeatureParser {
             platform = userPlatform
         }
 
-        return Feature(name: name, rolloutPercentage: percentage, platforms: platform, active: active)
+        var section = Section.None
+        if let sectionName = lowerCaseDictionary[sectionKey] as? String {
+            section = .Some(name: sectionName)
+        }
+
+        return Feature(name: name, rolloutPercentage: percentage, platforms: platform, section: section, active: active)
     }
 }

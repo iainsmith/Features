@@ -28,6 +28,17 @@ public func ==(lhs: FeatureName, rhs: FeatureName) -> Bool {
     return lhs.rawValue == rhs.rawValue
 }
 
+enum Section {
+    case None
+    case Some(name: String)
+
+    var name: String {
+        get {
+            switch self {
+            case .None:
+                return "no section"
+            case .Some(let name):
+                return name
             }
         }
     }
@@ -37,6 +48,7 @@ public struct Feature {
     let name: String
     let rolloutPercentage: UInt
     let platforms: Platform
+    let section: Section
     var active: Bool
 }
 

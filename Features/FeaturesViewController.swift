@@ -12,8 +12,22 @@ public protocol FeaturesViewControllerDelegate: AnyObject {
     func featuresViewControllerFinished(controller: FeaturesViewController)
 }
 
+public extension SequenceType {
+    func groupBy<U : Hashable>(@noescape keyFunc: Generator.Element -> U) -> [U:[Generator.Element]] {
+        var dict: [U:[Generator.Element]] = [:]
+        for el in self {
+            let key = keyFunc(el)
+            if case nil = dict[key]?.append(el) { dict[key] = [el] }
+        }
+        return dict
+    }
+}
+
+
 public class FeaturesViewController: UITableViewController {
     var features: [Feature]? = nil
+    var groupedBy: [String: [Feature]]? = nil
+
     weak var delegate: FeaturesViewControllerDelegate? = nil
 
     public init(delegate: FeaturesViewControllerDelegate) {
@@ -27,6 +41,10 @@ public class FeaturesViewController: UITableViewController {
 
     public override func viewDidLoad() {
         features = FeatureService.featureStore.features
+        groupedBy = features!.groupBy { feature in
+            return feature.section.name
+        }
+
         configureTableView()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(didSelectSave))
     }
@@ -48,7 +66,11 @@ public class FeaturesViewController: UITableViewController {
 extension FeaturesViewController {
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(FeatureCell.reuseIdentifier, forIndexPath: indexPath) as! FeatureCell
-        let feature = features![indexPath.row]
+
+        let key = keyForSection(indexPath.section)
+        let features = groupedBy![key]!
+
+        let feature = features[indexPath.row]
         cell.nameLabel.text = feature.name
         cell.detailLabel.text = feature.platforms.debugDescription
         cell.featureActive = feature.active
@@ -57,7 +79,29 @@ extension FeaturesViewController {
     }
 
     public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return features?.count ?? 0
+        let key = keyForSection(section)
+        return groupedBy![key]!.count
+    }
+
+    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return groupedBy!.keys.count
+    }
+
+    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return keyForSection(section)
+    }
+}
+
+extension FeaturesViewController {
+    private func keyForSection(index: Int) -> String {
+        let sortedKeys = groupedBy!.keys.sort()
+        return sortedKeys[index]
+    }
+
+    private func featureForIndexPath(indexPath: NSIndexPath) -> Feature {
+        let key = keyForSection(indexPath.section)
+        let features = groupedBy![key]!
+        return features[indexPath.row]
     }
 }
 
@@ -65,7 +109,7 @@ extension FeaturesViewController: FeatureCellDelegate {
     func cell(cell: FeatureCell, setFeatureEnabled enabled: Bool) {
         let index = tableView.indexPathForCell(cell)!
 
-        var feature = features![index.row]
+        var feature = featureForIndexPath(index)
         feature.active = enabled
 
         FeatureService.featureStore.updateFeature(feature)

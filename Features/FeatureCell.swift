@@ -12,6 +12,12 @@ protocol FeatureCellDelegate: AnyObject {
     func cell(cell: FeatureCell, setFeatureEnabled: Bool)
 }
 
+extension CGRect {
+    func edgeInset(insets: UIEdgeInsets) -> CGRect {
+        return CGRect(x: self.minX + insets.left, y: self.minY + insets.top, width: self.width - insets.left - insets.right, height: self.height - insets.top - insets.bottom);
+    }
+}
+
 internal class FeatureCell: UITableViewCell {
     internal weak var delegate: FeatureCellDelegate?
     static var reuseIdentifier = "com.features.featurecell"
@@ -37,5 +43,11 @@ internal class FeatureCell: UITableViewCell {
         set {
             toggle.on = newValue
         }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let totalIndentation = CGFloat(indentationLevel) * indentationWidth
+        contentView.frame = contentView.frame.edgeInset(UIEdgeInsets(top: 0, left: totalIndentation, bottom: 0, right: 0))
     }
 }

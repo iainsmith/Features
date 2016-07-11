@@ -22,5 +22,10 @@
         "active": true,
         "platforms": "iphone",
         "section" : "views"
+    },
+    {
+        "name": "Random Feature",
+        "active": true,
+        "platforms": "ipad"
     }
 ]

@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Red controller",
+        "active": true,
+        "percentage": 60,
+        "platforms" : "iPhone"
+    },
+    {
+        "Name": "Yellow controller",
+        "active": false
+    },
+    {
+        "name": "Green controller",
+        "active": true,
+        "platforms": "iphone,ipad"
+    }
+]

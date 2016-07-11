@@ -14,11 +14,11 @@ public class FeatureServiceShim: NSObject {
     }
 
     public static func featureEnabled(feature: FeatureName) -> Bool {
-        return FeatureService.featureStore.featureEnabled(feature)
+        return FeatureService.featureStore.isEnabled(feature)
     }
 
     public static func featureEnabledName(featureName: String) -> Bool {
         let feature = FeatureName(rawValue: featureName)
-        return FeatureService.featureStore.featureEnabled(feature)
+        return FeatureService.featureStore.isEnabled(feature)
     }
 }

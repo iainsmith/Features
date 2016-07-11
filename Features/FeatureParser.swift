@@ -45,6 +45,6 @@ internal struct FeatureParser {
             platform = userPlatform
         }
 
-        return Feature(name: name, active: active, rolloutPercentage: percentage, platforms: platform)
+        return Feature(name: name, rolloutPercentage: percentage, platforms: platform, active: active)
     }
 }

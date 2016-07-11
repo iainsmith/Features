@@ -22,6 +22,11 @@
 		0A2D03C41D33FA1C007C272E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03C31D33FA1C007C272E /* Assets.xcassets */; };
 		0A2D03C71D33FA1C007C272E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03C51D33FA1C007C272E /* LaunchScreen.storyboard */; };
 		0A2D03CD1D33FA92007C272E /* FeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03CC1D33FA92007C272E /* FeaturesViewController.swift */; };
+		0A2D03CF1D3401F2007C272E /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0AB6281CD920F000F9C54B /* Features.framework */; };
+		0A2D03D01D3401F2007C272E /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0AB6281CD920F000F9C54B /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A2D03D51D340218007C272E /* features.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03D41D340218007C272E /* features.json */; };
+		0A2D03D71D340263007C272E /* FeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03D61D340263007C272E /* FeatureCell.xib */; };
+		0A2D03D91D3406A9007C272E /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03D81D3406A9007C272E /* FeatureCell.swift */; };
 		0A9E71911D2F9B8F00C44E22 /* FeatureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AC87D621CDA674F00609BAD /* FeaturesObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */; };
 /* End PBXBuildFile section */
@@ -34,7 +39,28 @@
 			remoteGlobalIDString = 0A0AB6271CD920F000F9C54B;
 			remoteInfo = Features;
 		};
+		0A2D03D11D3401F2007C272E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A0AB61F1CD920F000F9C54B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A0AB6271CD920F000F9C54B;
+			remoteInfo = Features;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A2D03D31D3401F2007C272E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A2D03D01D3401F2007C272E /* Features.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A0AB6281CD920F000F9C54B /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +83,9 @@
 		0A2D03C61D33FA1C007C272E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A2D03C81D33FA1C007C272E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A2D03CC1D33FA92007C272E /* FeaturesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturesViewController.swift; sourceTree = "<group>"; };
+		0A2D03D41D340218007C272E /* features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = features.json; sourceTree = "<group>"; };
+		0A2D03D61D340263007C272E /* FeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeatureCell.xib; sourceTree = "<group>"; };
+		0A2D03D81D3406A9007C272E /* FeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureMacro.h; sourceTree = "<group>"; };
 		0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesObjectiveCTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D03CF1D3401F2007C272E /* Features.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +191,7 @@
 		0A2D03B91D33FA1C007C272E /* Features Sample App */ = {
 			isa = PBXGroup;
 			children = (
+				0A2D03D41D340218007C272E /* features.json */,
 				0A2D03BA1D33FA1C007C272E /* AppDelegate.swift */,
 				0A2D03BC1D33FA1C007C272E /* FirstViewController.swift */,
 				0A2D03BE1D33FA1C007C272E /* SecondViewController.swift */,
@@ -175,6 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				0A2D03CC1D33FA92007C272E /* FeaturesViewController.swift */,
+				0A2D03D61D340263007C272E /* FeatureCell.xib */,
+				0A2D03D81D3406A9007C272E /* FeatureCell.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -237,10 +270,12 @@
 				0A2D03B41D33FA1C007C272E /* Sources */,
 				0A2D03B51D33FA1C007C272E /* Frameworks */,
 				0A2D03B61D33FA1C007C272E /* Resources */,
+				0A2D03D31D3401F2007C272E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0A2D03D21D3401F2007C272E /* PBXTargetDependency */,
 			);
 			name = "Features Sample App";
 			productName = "Features Sample App";
@@ -259,6 +294,7 @@
 				TargetAttributes = {
 					0A0AB6271CD920F000F9C54B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = XT9ZTJB9ES;
 					};
 					0A0AB6311CD920F000F9C54B = {
 						CreatedOnToolsVersion = 7.3;
@@ -295,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D03D71D340263007C272E /* FeatureCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +349,7 @@
 			files = (
 				0A2D03C71D33FA1C007C272E /* LaunchScreen.storyboard in Resources */,
 				0A2D03C41D33FA1C007C272E /* Assets.xcassets in Resources */,
+				0A2D03D51D340218007C272E /* features.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +362,7 @@
 			files = (
 				0A2D03AF1D33E40B007C272E /* ObjCShim.swift in Sources */,
 				0A0AB6711CD9244600F9C54B /* Features.swift in Sources */,
+				0A2D03D91D3406A9007C272E /* FeatureCell.swift in Sources */,
 				0A2D03AD1D33E357007C272E /* FeatureParser.swift in Sources */,
 				0A2D03CD1D33FA92007C272E /* FeaturesViewController.swift in Sources */,
 				0A0AB6431CD9214000F9C54B /* FeatureService.swift in Sources */,
@@ -357,6 +396,11 @@
 			isa = PBXTargetDependency;
 			target = 0A0AB6271CD920F000F9C54B /* Features */;
 			targetProxy = 0A0AB6341CD920F000F9C54B /* PBXContainerItemProxy */;
+		};
+		0A2D03D21D3401F2007C272E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A0AB6271CD920F000F9C54B /* Features */;
+			targetProxy = 0A2D03D11D3401F2007C272E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -529,6 +573,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Features Sample App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.m23.Features-Sample-App";
@@ -540,6 +586,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Features Sample App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.m23.Features-Sample-App";

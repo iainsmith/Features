@@ -110,15 +110,21 @@ extension Platform: CustomDebugStringConvertible {
     }
 }
 
-struct Feature {
+public struct Feature {
     let name: String
-    let active: Bool
     let rolloutPercentage: UInt
     let platforms: Platform
+    var active: Bool
 }
 
+public func == (lhs: Feature, rhs: Feature) -> Bool {
+    return lhs.name == rhs.name && lhs.active == rhs.active && rhs.rolloutPercentage == rhs.rolloutPercentage && lhs.platforms == rhs.platforms
+}
+
+extension Feature: Equatable { }
+
 public struct FeatureStore {
-    let features: [Feature]
+    var features: [Feature]
     let devicePercentage: UInt // Needs to be persisted across runs
     let currentPlatform: Platform
 
@@ -128,7 +134,7 @@ public struct FeatureStore {
         self.currentPlatform = Platform.currentDevice()
     }
 
-    public func featureEnabled(featureName: FeatureName) -> Bool {
+    public func isEnabled(featureName: FeatureName) -> Bool {
         return featureEnabled(featureName.rawValue)
     }
 
@@ -147,10 +153,20 @@ public struct FeatureStore {
 
         return false
     }
+
+    mutating func updateFeature(feature: Feature) {
+        let index = features.indexOf { $0.name == feature.name }
+
+        if let index = index {
+            features[index] = feature
+        } else {
+            features.append(feature)
+        }
+    }
 }
 
 public func featureEnabeld(feature: FeatureName) -> Bool {
-    return FeatureService.featureStore.featureEnabled(feature)
+    return FeatureService.featureStore.isEnabled(feature)
 }
 
 extension FeatureStore: CustomDebugStringConvertible {

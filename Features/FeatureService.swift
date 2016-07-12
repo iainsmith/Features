@@ -25,6 +25,11 @@ public struct FeatureService {
         }
     }
 
+    static func updatePercentage(percentage: UInt) {
+        store.feature_storedPercentage = percentage
+        featureStore.updatePercentage(percentage)
+    }
+
     internal static func percentage() -> UInt {
        return overRidePercentage ?? existingPercentage() ?? generatedSavedPercentage()
     }

@@ -27,6 +27,7 @@ public extension SequenceType {
 public class FeaturesViewController: UITableViewController {
     var features: [Feature]? = nil
     var groupedBy: [String: [Feature]]? = nil
+    var headerView: FeaturesHeaderView? = nil
 
     weak var delegate: FeaturesViewControllerDelegate? = nil
 
@@ -58,10 +59,23 @@ public class FeaturesViewController: UITableViewController {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.allowsSelection = false
+
+        headerView = FeaturesHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70), delegate: self)
+
+        headerView?.percentage = FeatureService.featureStore.devicePercentage
+        tableView.tableHeaderView = headerView
+
     }
 
     @objc private func didSelectSave() {
         delegate?.featuresViewControllerFinished(self)
+    }
+}
+
+extension FeaturesViewController: FeaturesHeaderViewDelegate {
+    func didUpdateDevicePercentage(percentage: UInt) {
+        FeatureService.updatePercentage(percentage)
+        headerView?.percentage = FeatureService.featureStore.devicePercentage
     }
 }
 

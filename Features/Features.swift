@@ -60,7 +60,7 @@ extension Feature: Equatable { }
 
 public struct FeatureStore {
     var features: [Feature]
-    let devicePercentage: UInt // Needs to be persisted across runs
+    var devicePercentage: UInt
     let currentPlatform: Platform
 
     init(features: [Feature], devicePercentage: UInt) {
@@ -87,6 +87,10 @@ public struct FeatureStore {
         }
 
         return false
+    }
+
+    internal mutating func updatePercentage(percentage: UInt) {
+        devicePercentage = percentage
     }
 
     mutating func updateFeature(feature: Feature) {

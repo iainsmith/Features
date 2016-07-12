@@ -17,7 +17,9 @@ extension NSUserDefaults: FeaturePercentageStore {
 
     public var feature_storedPercentage: UInt? {
         get {
-            return UInt(integerForKey(NSUserDefaults.featurePercentageKey))
+            let value = integerForKey(NSUserDefaults.featurePercentageKey)
+            guard value != 0 else { return nil }
+            return UInt(value)
         }
 
         set {

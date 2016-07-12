@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let featuresController = FeaturesViewController(delegate: self)
 
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+
+        let featuresController = FeaturesViewController(delegate: self)
         window?.rootViewController = UINavigationController(rootViewController: featuresController)
         window?.makeKeyAndVisible()
         return true
@@ -34,36 +34,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: FeaturesViewControllerDelegate {
     func featuresViewControllerFinished(controller: FeaturesViewController) {
         window?.rootViewController = TabBarControllerFactory.controllerWithFeatures()
-    }
-}
-
-class TabBarControllerFactory {
-    static func controllerWithFeatures(featureStore: FeatureStore = FeatureService.featureStore) -> UITabBarController{
-        let tabBar = UITabBarController()
-
-        var viewControllers: [UIViewController] = []
-
-        if featureStore.isActive(.redController) {
-            viewControllers.append(controllerWithColor(.redColor(), title: "red"))
-        }
-
-        if featureStore.isActive(.yellowController) {
-            viewControllers.append(controllerWithColor(.yellowColor(), title: "Yellow"))
-        }
-
-        if featureStore.isActive(.greenController) {
-            viewControllers.append(controllerWithColor(.greenColor(), title: "green"))
-        }
-
-        tabBar.viewControllers = viewControllers
-
-        return tabBar
-    }
-
-    private static func controllerWithColor(color: UIColor, title: String) -> UIViewController {
-        let vc = UIViewController()
-        vc.view.backgroundColor = color
-        vc.title = title
-        return vc
     }
 }

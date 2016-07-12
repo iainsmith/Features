@@ -28,6 +28,7 @@
 		0A2D03DB1D344253007C272E /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03DA1D344253007C272E /* Platform.swift */; };
 		0A9E71911D2F9B8F00C44E22 /* FeatureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AA19D591D35992400ECE43B /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA19D581D35992400ECE43B /* FeatureStore.swift */; };
+		0AA19D5B1D359A6300ECE43B /* TabBarControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA19D5A1D359A6300ECE43B /* TabBarControllerFactory.swift */; };
 		0AC6B0321D34D7B500456021 /* FeaturesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */; };
 		0AC6B0341D34D7C300456021 /* FeaturesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */; };
 		0AC87D621CDA674F00609BAD /* FeaturesObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */; };
@@ -89,6 +90,7 @@
 		0A2D03DA1D344253007C272E /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureMacro.h; sourceTree = "<group>"; };
 		0AA19D581D35992400ECE43B /* FeatureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
+		0AA19D5A1D359A6300ECE43B /* TabBarControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerFactory.swift; sourceTree = "<group>"; };
 		0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturesHeaderView.swift; sourceTree = "<group>"; };
 		0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturesHeaderView.xib; sourceTree = "<group>"; };
 		0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesObjectiveCTests.m; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				0A2D03D41D340218007C272E /* features.json */,
 				0A2D03BA1D33FA1C007C272E /* AppDelegate.swift */,
+				0AA19D5A1D359A6300ECE43B /* TabBarControllerFactory.swift */,
 				0A2D03C31D33FA1C007C272E /* Assets.xcassets */,
 				0A2D03C51D33FA1C007C272E /* LaunchScreen.storyboard */,
 				0A2D03C81D33FA1C007C272E /* Info.plist */,
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA19D5B1D359A6300ECE43B /* TabBarControllerFactory.swift in Sources */,
 				0A2D03BB1D33FA1C007C272E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

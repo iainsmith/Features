@@ -13,6 +13,10 @@ public class FeatureServiceShim: NSObject {
         FeatureService.bundle = bundle
     }
 
+    public static func setFileName(fileName: String) {
+        FeatureService.fileName = fileName
+    }
+
     public static func featureEnabled(feature: FeatureName) -> Bool {
         return FeatureService.featureStore.isEnabled(feature)
     }

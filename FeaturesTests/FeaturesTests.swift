@@ -33,9 +33,9 @@ class FeaturesServiceTests: XCTestCase {
         FeatureService.bundle = NSBundle(forClass:self.dynamicType)
         let store = FeatureService.featureStore
         XCTAssert(store.features.count == 3)
-        XCTAssertTrue(store.featureEnabled(.One))
-        XCTAssertTrue(featureEnabeld(.One))
-        XCTAssertFalse(featureEnabeld(.Second))
+        XCTAssertTrue(store.isActive(.One))
+        XCTAssertTrue(isActive(.One))
+        XCTAssertFalse(isActive(.Second))
 
         let secondFeature = store.features.filter { $0.name == FeatureName.Second.rawValue }.first!
         XCTAssertFalse(secondFeature.active)
@@ -54,8 +54,8 @@ class FeaturesServiceTests: XCTestCase {
         let firstFeature = FeatureName(rawValue: "Feature one")
         let secondFeature = FeatureName(rawValue: "Feature two")
 
-        let first = Feature(name: firstFeature.rawValue, active: true, rolloutPercentage: 30, platforms: .All)
-        let second = Feature(name: secondFeature.rawValue, active: true, rolloutPercentage: 80, platforms: .All)
+        let first = Feature(name: firstFeature.rawValue, rolloutPercentage: 30, platforms: .All, section: .None, active: true)
+        let second = Feature(name: secondFeature.rawValue, rolloutPercentage: 80, platforms: .All, section: .None, active: true)
 
         var stores: [FeatureStore] = []
         for _ in 1...10000 {
@@ -64,8 +64,8 @@ class FeaturesServiceTests: XCTestCase {
             stores.append(store)
         }
 
-        let firstResult = stores.map { $0.featureEnabled(firstFeature) }
-        let secondResult = stores.map { $0.featureEnabled(secondFeature) }
+        let firstResult = stores.map { $0.isActive(firstFeature) }
+        let secondResult = stores.map { $0.isActive(secondFeature) }
 
         let firstActive = firstResult.filter { $0 == true }.count
         let secondActiveCount = secondResult.filter { $0 == true }.count

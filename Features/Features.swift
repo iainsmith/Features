@@ -69,11 +69,11 @@ public struct FeatureStore {
         self.currentPlatform = Platform.currentDevice()
     }
 
-    public func isEnabled(featureName: FeatureName) -> Bool {
-        return featureEnabled(featureName.rawValue)
+    public func isActive(featureName: FeatureName) -> Bool {
+        return isActive(featureName.rawValue)
     }
 
-    private func featureEnabled(name: String) -> Bool {
+    private func isActive(name: String) -> Bool {
         let index = features.indexOf { feature -> Bool in
             feature.name == name
         }
@@ -100,8 +100,8 @@ public struct FeatureStore {
     }
 }
 
-public func featureEnabeld(feature: FeatureName) -> Bool {
-    return FeatureService.featureStore.isEnabled(feature)
+public func isActive(feature: FeatureName) -> Bool {
+    return FeatureService.featureStore.isActive(feature)
 }
 
 extension FeatureStore: CustomDebugStringConvertible {

@@ -43,15 +43,15 @@ class TabBarControllerFactory {
 
         var viewControllers: [UIViewController] = []
 
-        if features.isEnabled(.redController) {
+        if features.isActive(.redController) {
             viewControllers.append(controllerWithColor(.redColor(), title: "red"))
         }
 
-        if features.isEnabled(.yellowController) {
+        if features.isActive(.yellowController) {
             viewControllers.append(controllerWithColor(.yellowColor(), title: "Yellow"))
         }
 
-        if features.isEnabled(.greenController) {
+        if features.isActive(.greenController) {
             viewControllers.append(controllerWithColor(.greenColor(), title: "green"))
         }
 

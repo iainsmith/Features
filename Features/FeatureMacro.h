@@ -8,4 +8,4 @@
 
 #import <Foundation/Foundation.h>
 
-#define FEATURE_ENABLED(featureName) [FeatureServiceShim featureEnabled:featureName]
+#define FEATURE_ACTIVE(featureName) [FeatureServiceShim isActive:featureName]

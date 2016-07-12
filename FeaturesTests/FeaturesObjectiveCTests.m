@@ -34,8 +34,8 @@
 {
     [FeatureServiceShim setBundle:[NSBundle bundleForClass:self.class]];
 
-    XCTAssertTrue([FeatureServiceShim featureEnabled:FeatureName.firstFeature]);
-    XCTAssertTrue(FEATURE_ENABLED(FeatureName.firstFeature));
+    XCTAssertTrue([FeatureServiceShim isActive:FeatureName.firstFeature]);
+    XCTAssertTrue(FEATURE_ACTIVE(FeatureName.firstFeature));
 }
 
 @end

@@ -17,12 +17,12 @@ public class FeatureServiceShim: NSObject {
         FeatureService.fileName = fileName
     }
 
-    public static func featureEnabled(feature: FeatureName) -> Bool {
-        return FeatureService.featureStore.isEnabled(feature)
+    public static func isActive(feature: FeatureName) -> Bool {
+        return FeatureService.featureStore.isActive(feature)
     }
 
-    public static func featureEnabledName(featureName: String) -> Bool {
+    public static func isActiveFeatureName(featureName: String) -> Bool {
         let feature = FeatureName(rawValue: featureName)
-        return FeatureService.featureStore.isEnabled(feature)
+        return FeatureService.featureStore.isActive(feature)
     }
 }

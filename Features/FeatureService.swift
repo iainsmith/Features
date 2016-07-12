@@ -8,12 +8,22 @@
 
 import Foundation
 
+public typealias FeatureData = (name: String,  active: Bool)
+
 public struct FeatureService {
     public static var fileName = "features"
     public static var bundle = NSBundle.mainBundle()
     public static var overRidePercentage: UInt? = nil
     public static var featureStore: FeatureStore = FeatureParser.loadFromDisk()
     public static var store: FeaturePercentageStore = NSUserDefaults.standardUserDefaults()
+
+    public static func featureDetails() -> [FeatureData] {
+        return featureStore.features.map { feature in
+            let name = feature.name
+            let active = featureStore.isActive(name)
+            return (name: name, active: active)
+        }
+    }
 
     internal static func percentage() -> UInt {
        return overRidePercentage ?? existingPercentage() ?? generatedSavedPercentage()

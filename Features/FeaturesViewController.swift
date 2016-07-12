@@ -45,6 +45,8 @@ public class FeaturesViewController: UITableViewController {
             return feature.section.name
         }
 
+        navigationItem.title = "Features"
+
         configureTableView()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(didSelectSave))
     }
@@ -72,7 +74,7 @@ extension FeaturesViewController {
 
         let feature = features[indexPath.row]
         cell.nameLabel.text = feature.name
-        cell.detailLabel.text = feature.platforms.debugDescription
+        cell.detailLabel.text = feature.platforms.displayString
         cell.featureActive = feature.active
         cell.delegate = self
         return cell

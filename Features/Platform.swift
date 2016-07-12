@@ -40,21 +40,21 @@ struct Platform: OptionSetType {
     static func platFormFromJSONString(jsonString: String?) -> Platform? {
         guard let jsonString = jsonString else { return Platform.All }
 
-        var platform: Platform = []
+        var combinedPlatform: Platform = []
         let string = jsonString.lowercaseString
         ["iphone", "ipad", "tvos"].forEach { member in
             if string.containsString(member) {
-                if let _ = Platform(string: member) {
-                    platform.insert(Platform())
+                if let platform = Platform(string: member) {
+                    combinedPlatform.insert(platform)
                 }
             }
         }
 
-        if platform.isEmpty {
+        if combinedPlatform.isEmpty {
             return nil
         }
 
-        return platform
+        return combinedPlatform
     }
 
     static func currentDevice() -> Platform {
@@ -72,20 +72,30 @@ struct Platform: OptionSetType {
 }
 
 extension Platform: CustomDebugStringConvertible {
+    var displayString: String {
+        get {
+            var platforms = [String]()
+            if self.contains(.iPhone) {
+                platforms.append("iPhone")
+            }
+
+            if self.contains(.iPad) {
+                platforms.append("iPad")
+            }
+
+            if self.contains(.tvOS) {
+                platforms.append("TVOS")
+            }
+
+            if platforms.count == 3 {
+                platforms = ["All"]
+            }
+            
+            return platforms.joinWithSeparator(", ")
+        }
+    }
+
     var debugDescription: String {
-        var platforms = [String]()
-        if self.contains(.iPhone) {
-            platforms.append("iPhone")
-        }
-
-        if self.contains(.iPad) {
-            platforms.append("iPad")
-        }
-
-        if self.contains(.tvOS) {
-            platforms.append("TVOS")
-        }
-
-        return platforms.joinWithSeparator(", ")
+        return displayString
     }
 }

@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLg-Ep-TWn" userLabel="name">
-                        <rect key="frame" x="8" y="8" width="42" height="19.5"/>
+                        <rect key="frame" x="8" y="16" width="42" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -28,17 +28,17 @@
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZ1-Aq-UKX" userLabel="details">
-                        <rect key="frame" x="8" y="29" width="35.5" height="73.5"/>
+                        <rect key="frame" x="8" y="37" width="36" height="78"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="OZ1-Aq-UKX" secondAttribute="bottom" constant="20" id="1dz-VI-0hH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OZ1-Aq-UKX" secondAttribute="bottom" constant="8" id="1dz-VI-0hH"/>
                     <constraint firstItem="OZ1-Aq-UKX" firstAttribute="top" secondItem="YLg-Ep-TWn" secondAttribute="bottom" constant="1.5" id="5nm-ya-Uig"/>
                     <constraint firstItem="8PQ-RV-uLK" firstAttribute="top" secondItem="ka7-l8-Vcx" secondAttribute="topMargin" id="AqE-ft-WBo"/>
-                    <constraint firstItem="YLg-Ep-TWn" firstAttribute="top" secondItem="ka7-l8-Vcx" secondAttribute="topMargin" id="Kie-gM-JTi"/>
+                    <constraint firstItem="YLg-Ep-TWn" firstAttribute="top" secondItem="ka7-l8-Vcx" secondAttribute="topMargin" constant="8" id="Kie-gM-JTi"/>
                     <constraint firstItem="OZ1-Aq-UKX" firstAttribute="leading" secondItem="ka7-l8-Vcx" secondAttribute="leadingMargin" id="Rfr-Ki-6ck"/>
                     <constraint firstItem="8PQ-RV-uLK" firstAttribute="trailing" secondItem="ka7-l8-Vcx" secondAttribute="trailingMargin" id="VYW-SG-bne"/>
                     <constraint firstItem="YLg-Ep-TWn" firstAttribute="leading" secondItem="ka7-l8-Vcx" secondAttribute="leadingMargin" id="f6P-PG-cU9"/>

@@ -125,10 +125,11 @@ extension FeaturesViewController: FeatureCellDelegate {
     func cell(cell: FeatureCell, setFeatureEnabled enabled: Bool) {
         let index = tableView.indexPathForCell(cell)!
 
-        var feature = featureForIndexPath(index)
-        feature.active = enabled
+        let existingFeature = featureForIndexPath(index)
+        let newFeature = Feature(name: existingFeature.name, rolloutPercentage: existingFeature.rolloutPercentage, platforms: existingFeature.platforms, section: existingFeature.section, active: enabled)
 
-        FeatureService.featureStore.updateFeature(feature)
-        features = FeatureService.featureStore.features
+        let newStore = FeatureService.featureStore.featuresByUpdatingFeature(newFeature)
+        FeatureService.featureStore = newStore
+        features = newStore.features
     }
 }

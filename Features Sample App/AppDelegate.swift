@@ -38,20 +38,20 @@ extension AppDelegate: FeaturesViewControllerDelegate {
 }
 
 class TabBarControllerFactory {
-    static func controllerWithFeatures(features: FeatureStore = FeatureService.featureStore) -> UITabBarController{
+    static func controllerWithFeatures(featureStore: FeatureStore = FeatureService.featureStore) -> UITabBarController{
         let tabBar = UITabBarController()
 
         var viewControllers: [UIViewController] = []
 
-        if features.isActive(.redController) {
+        if featureStore.isActive(.redController) {
             viewControllers.append(controllerWithColor(.redColor(), title: "red"))
         }
 
-        if features.isActive(.yellowController) {
+        if featureStore.isActive(.yellowController) {
             viewControllers.append(controllerWithColor(.yellowColor(), title: "Yellow"))
         }
 
-        if features.isActive(.greenController) {
+        if featureStore.isActive(.greenController) {
             viewControllers.append(controllerWithColor(.greenColor(), title: "green"))
         }
 

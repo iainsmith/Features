@@ -27,7 +27,7 @@ public struct FeatureService {
 
     static func updatePercentage(percentage: UInt) {
         store.feature_storedPercentage = percentage
-        featureStore.updatePercentage(percentage)
+        featureStore = FeatureStore(features: featureStore.features, devicePercentage: percentage)
     }
 
     internal static func percentage() -> UInt {

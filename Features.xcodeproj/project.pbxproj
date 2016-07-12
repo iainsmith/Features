@@ -11,11 +11,11 @@
 		0A0AB6331CD920F000F9C54B /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0AB6281CD920F000F9C54B /* Features.framework */; };
 		0A0AB6381CD920F000F9C54B /* FeaturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AB6371CD920F000F9C54B /* FeaturesTests.swift */; };
 		0A0AB6431CD9214000F9C54B /* FeatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AB6421CD9214000F9C54B /* FeatureService.swift */; };
-		0A0AB6711CD9244600F9C54B /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AB6701CD9244600F9C54B /* Features.swift */; };
+		0A0AB6711CD9244600F9C54B /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0AB6701CD9244600F9C54B /* Feature.swift */; };
 		0A0AB6731CD924E100F9C54B /* features.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0AB6721CD924E100F9C54B /* features.json */; };
 		0A2D03AD1D33E357007C272E /* FeatureParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03AC1D33E357007C272E /* FeatureParser.swift */; };
 		0A2D03AF1D33E40B007C272E /* ObjCShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03AE1D33E40B007C272E /* ObjCShim.swift */; };
-		0A2D03B31D33E474007C272E /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03B21D33E474007C272E /* FeatureStore.swift */; };
+		0A2D03B31D33E474007C272E /* FeaturePercentageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03B21D33E474007C272E /* FeaturePercentageStore.swift */; };
 		0A2D03BB1D33FA1C007C272E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03BA1D33FA1C007C272E /* AppDelegate.swift */; };
 		0A2D03C41D33FA1C007C272E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03C31D33FA1C007C272E /* Assets.xcassets */; };
 		0A2D03C71D33FA1C007C272E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D03C51D33FA1C007C272E /* LaunchScreen.storyboard */; };
@@ -27,6 +27,7 @@
 		0A2D03D91D3406A9007C272E /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03D81D3406A9007C272E /* FeatureCell.swift */; };
 		0A2D03DB1D344253007C272E /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D03DA1D344253007C272E /* Platform.swift */; };
 		0A9E71911D2F9B8F00C44E22 /* FeatureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0AA19D591D35992400ECE43B /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA19D581D35992400ECE43B /* FeatureStore.swift */; };
 		0AC6B0321D34D7B500456021 /* FeaturesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */; };
 		0AC6B0341D34D7C300456021 /* FeaturesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */; };
 		0AC87D621CDA674F00609BAD /* FeaturesObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */; };
@@ -71,11 +72,11 @@
 		0A0AB6371CD920F000F9C54B /* FeaturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTests.swift; sourceTree = "<group>"; };
 		0A0AB6391CD920F000F9C54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A0AB6421CD9214000F9C54B /* FeatureService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureService.swift; sourceTree = "<group>"; };
-		0A0AB6701CD9244600F9C54B /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
+		0A0AB6701CD9244600F9C54B /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		0A0AB6721CD924E100F9C54B /* features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = features.json; sourceTree = "<group>"; };
 		0A2D03AC1D33E357007C272E /* FeatureParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureParser.swift; sourceTree = "<group>"; };
 		0A2D03AE1D33E40B007C272E /* ObjCShim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCShim.swift; sourceTree = "<group>"; };
-		0A2D03B21D33E474007C272E /* FeatureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
+		0A2D03B21D33E474007C272E /* FeaturePercentageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturePercentageStore.swift; sourceTree = "<group>"; };
 		0A2D03B81D33FA1C007C272E /* Features Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Features Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2D03BA1D33FA1C007C272E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A2D03C31D33FA1C007C272E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		0A2D03D81D3406A9007C272E /* FeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		0A2D03DA1D344253007C272E /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		0A9E718F1D2F9B8F00C44E22 /* FeatureMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureMacro.h; sourceTree = "<group>"; };
+		0AA19D581D35992400ECE43B /* FeatureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
 		0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturesHeaderView.swift; sourceTree = "<group>"; };
 		0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturesHeaderView.xib; sourceTree = "<group>"; };
 		0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesObjectiveCTests.m; sourceTree = "<group>"; };
@@ -183,8 +185,9 @@
 			isa = PBXGroup;
 			children = (
 				0A2D03AC1D33E357007C272E /* FeatureParser.swift */,
-				0A2D03B21D33E474007C272E /* FeatureStore.swift */,
-				0A0AB6701CD9244600F9C54B /* Features.swift */,
+				0A2D03B21D33E474007C272E /* FeaturePercentageStore.swift */,
+				0A0AB6701CD9244600F9C54B /* Feature.swift */,
+				0AA19D581D35992400ECE43B /* FeatureStore.swift */,
 				0A2D03DA1D344253007C272E /* Platform.swift */,
 				0A0AB6421CD9214000F9C54B /* FeatureService.swift */,
 			);
@@ -365,13 +368,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2D03AF1D33E40B007C272E /* ObjCShim.swift in Sources */,
-				0A0AB6711CD9244600F9C54B /* Features.swift in Sources */,
+				0A0AB6711CD9244600F9C54B /* Feature.swift in Sources */,
 				0A2D03D91D3406A9007C272E /* FeatureCell.swift in Sources */,
 				0A2D03AD1D33E357007C272E /* FeatureParser.swift in Sources */,
+				0AA19D591D35992400ECE43B /* FeatureStore.swift in Sources */,
 				0A2D03CD1D33FA92007C272E /* FeaturesViewController.swift in Sources */,
 				0A2D03DB1D344253007C272E /* Platform.swift in Sources */,
 				0A0AB6431CD9214000F9C54B /* FeatureService.swift in Sources */,
-				0A2D03B31D33E474007C272E /* FeatureStore.swift in Sources */,
+				0A2D03B31D33E474007C272E /* FeaturePercentageStore.swift in Sources */,
 				0AC6B0321D34D7B500456021 /* FeaturesHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

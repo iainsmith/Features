@@ -34,11 +34,11 @@ internal struct FeatureParser {
             return nil
         }
 
-        let percentage: UInt
+        let rolloutPercentage: UInt?
         if active {
-            percentage = lowerCaseDictionary[percentageKey] as? UInt ?? 100
+            rolloutPercentage = lowerCaseDictionary[percentageKey] as? UInt ?? 100
         } else {
-            percentage = 0
+            rolloutPercentage = nil
         }
 
         var platform = Platform.All
@@ -51,6 +51,6 @@ internal struct FeatureParser {
             section = .Some(name: sectionName)
         }
 
-        return Feature(name: name, rolloutPercentage: percentage, platforms: platform, section: section, active: active)
+        return Feature(name: name, rolloutPercentage: rolloutPercentage, platforms: platform, section: section, active: active)
     }
 }

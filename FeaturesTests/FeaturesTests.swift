@@ -39,7 +39,7 @@ class FeaturesServiceTests: XCTestCase {
 
         let secondFeature = store.features.filter { $0.name == FeatureName.Second.rawValue }.first!
         XCTAssertFalse(secondFeature.active)
-        XCTAssertTrue(secondFeature.rolloutPercentage == 0)
+        XCTAssertTrue(secondFeature.rolloutPercentage == nil)
     }
 
     func testMultiplePlatforms() {

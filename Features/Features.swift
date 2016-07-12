@@ -28,7 +28,7 @@ public func ==(lhs: FeatureName, rhs: FeatureName) -> Bool {
     return lhs.rawValue == rhs.rawValue
 }
 
-enum Section {
+public enum Section {
     case None
     case Some(name: String)
 
@@ -45,11 +45,11 @@ enum Section {
 }
 
 public struct Feature {
-    let name: String
-    let rolloutPercentage: UInt
-    let platforms: Platform
-    let section: Section
-    var active: Bool
+    public let name: String
+    public let rolloutPercentage: UInt
+    internal let platforms: Platform
+    public let section: Section
+    public var active: Bool
 }
 
 public func == (lhs: Feature, rhs: Feature) -> Bool {
@@ -73,7 +73,7 @@ public struct FeatureStore {
         return isActive(featureName.rawValue)
     }
 
-    private func isActive(name: String) -> Bool {
+    internal func isActive(name: String) -> Bool {
         let index = features.indexOf { feature -> Bool in
             feature.name == name
         }

@@ -28,7 +28,7 @@ public func ==(lhs: FeatureName, rhs: FeatureName) -> Bool {
     return lhs.rawValue == rhs.rawValue
 }
 
-public enum Section {
+internal enum Section {
     case None
     case Some(name: String)
 
@@ -46,10 +46,10 @@ public enum Section {
 
 public struct Feature {
     public let name: String
-    public let rolloutPercentage: UInt?
+    internal let rolloutPercentage: UInt?
     internal let platforms: Platform
-    public let section: Section
-    public let active: Bool
+    internal let section: Section
+    internal let active: Bool
 }
 
 public func == (lhs: Feature, rhs: Feature) -> Bool {

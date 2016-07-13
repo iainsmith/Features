@@ -46,7 +46,7 @@ public struct FeatureStore {
         return false
     }
 
-    func featuresByUpdatingFeature(feature: Feature) -> FeatureStore {
+    func featureStoreByUpdatingFeature(feature: Feature) -> FeatureStore {
         var localFeaturs = features
         let index = localFeaturs.indexOf { $0.name == feature.name }
 

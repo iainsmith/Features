@@ -10,7 +10,7 @@ import UIKit
 import Features
 
 class TabBarControllerFactory {
-    static func controllerWithFeatures(featureStore: FeatureStore = FeatureService.featureStore) -> UITabBarController{
+    static func controllerWithFeatures(featureStore: FeatureStore = FeatureService.featureStore) -> UITabBarController {
         let tabBar = UITabBarController()
 
         var viewControllers: [UIViewController] = []

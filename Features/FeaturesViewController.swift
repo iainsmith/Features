@@ -31,11 +31,19 @@ public class FeaturesViewController: UITableViewController {
 
     weak var delegate: FeaturesViewControllerDelegate? = nil
 
-    public init(delegate: FeaturesViewControllerDelegate) {
+    public convenience init(delegate: FeaturesViewControllerDelegate) {
+        self.init(style: .Grouped)
         self.delegate = delegate
-        super.init(style: .Grouped)
     }
-    
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
+    }
+
+    override init(style: UITableViewStyle) {
+        super.init(style: style)
+    }
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

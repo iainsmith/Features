@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias FeatureData = (name: String,  active: Bool)
+public typealias FeatureData = (name: String, active: Bool)
 
 public struct FeatureService {
     public static var fileName = "features"
@@ -25,7 +25,7 @@ public struct FeatureService {
         }
     }
 
-    static func updatePercentage(percentage: UInt) {
+    public static func updatePercentage(percentage: UInt) {
         store.feature_storedPercentage = percentage
         featureStore = FeatureStore(features: featureStore.features, devicePercentage: percentage)
     }

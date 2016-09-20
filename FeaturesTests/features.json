@@ -18,5 +18,15 @@
         "name": "Third Feature",
         "active": true,
         "platforms": "iphone,ipad"
+    },
+    {
+        "name": "Fourth Feature",
+        "active": true,
+        "platforms": "ipad",
+        "options": [
+            "Test",
+            "Staging",
+            "Production"
+        ]
     }
 ]

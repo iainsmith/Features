@@ -50,6 +50,18 @@ public struct Feature {
     internal let platforms: Platform
     internal let section: Section
     internal let active: Bool
+    internal let options: [String]?
+    internal let activeOption: String?
+
+    init(name: String, rolloutPercentage: UInt?, platforms: Platform, section: Section, active: Bool, options: [String]?) {
+        self.name = name
+        self.rolloutPercentage = rolloutPercentage
+        self.platforms = platforms
+        self.section = section
+        self.active = active
+        self.options = options
+        self.activeOption = options?.first
+    }
 }
 
 public func == (lhs: Feature, rhs: Feature) -> Bool {

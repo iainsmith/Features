@@ -13,6 +13,7 @@ extension FeatureName {
     @nonobjc static let One = FeatureName(rawValue: "First Feature")
     @nonobjc static let Second = FeatureName(rawValue: "Second Feature")
     @nonobjc static let Third = FeatureName(rawValue: "Third Feature")
+    @nonobjc static let Fourth = FeatureName(rawValue: "Fourth Feature")
 }
 
 class FeaturesServiceTests: XCTestCase {
@@ -25,14 +26,13 @@ class FeaturesServiceTests: XCTestCase {
 
     func testLoadingFeaturesFromDifferentBundle() {
         let store = FeatureService.featureStore
-        XCTAssert(store.features.count == 3)
+        XCTAssert(store.features.count == 4)
         XCTAssertTrue(store.currentPlatform.contains(.iPhone))
     }
 
     func testFeatures() {
         FeatureService.bundle = NSBundle(forClass:self.dynamicType)
         let store = FeatureService.featureStore
-        XCTAssert(store.features.count == 3)
         XCTAssertTrue(store.isActive(.One))
         XCTAssertTrue(isActive(.One))
         XCTAssertFalse(isActive(.Second))
@@ -50,12 +50,13 @@ class FeaturesServiceTests: XCTestCase {
         XCTAssertTrue(platforms.contains(.iPhone) && platforms.contains(.iPad))
     }
 
+    // This may occasionally fail, just run it again.
     func testDistribution() {
         let firstFeature = FeatureName(rawValue: "Feature one")
         let secondFeature = FeatureName(rawValue: "Feature two")
 
-        let first = Feature(name: firstFeature.rawValue, rolloutPercentage: 30, platforms: .All, section: .None, active: true)
-        let second = Feature(name: secondFeature.rawValue, rolloutPercentage: 80, platforms: .All, section: .None, active: true)
+        let first = Feature(name: firstFeature.rawValue, rolloutPercentage: 30, platforms: .All, section: .None, active: true, options: nil)
+        let second = Feature(name: secondFeature.rawValue, rolloutPercentage: 80, platforms: .All, section: .None, active: true, options: nil)
 
         var stores: [FeatureStore] = []
         for _ in 1...10000 {
@@ -71,5 +72,13 @@ class FeaturesServiceTests: XCTestCase {
         let secondActiveCount = secondResult.filter { $0 == true }.count
         XCTAssert(firstActive >= 2900 && firstActive <= 3100)
         XCTAssert(secondActiveCount >= 7900 && secondActiveCount <= 8100)
+    }
+
+    func testOptions() {
+        let store = FeatureService.featureStore
+        let fourth = store.features.filter { $0.name == FeatureName.Fourth.rawValue }.first!
+        XCTAssert(fourth.options! == ["Test", "Staging", "Production"])
+
+        XCTAssertTrue(FourthFeature.current == .Test)
     }
 }

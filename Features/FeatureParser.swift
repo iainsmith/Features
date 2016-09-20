@@ -8,6 +8,27 @@
 
 import Foundation
 
+protocol FeatureEnum: RawRepresentable {
+   static var featureName: FeatureName { get }
+   static var current: Self { get }
+}
+
+extension FeatureEnum where RawValue == String {
+    static var current: Self {
+        let feature = FeatureService.featureStore.features.filter { $0.name == Self.featureName.rawValue }.first!
+        let option = feature.activeOption!
+        return Self(rawValue: option )!
+    }
+}
+
+enum FourthFeature: String, FeatureEnum {
+    static let featureName = FeatureName(rawValue: "Fourth Feature")
+
+    case Test
+    case Staging
+    case Production
+}
+
 internal struct FeatureParser {
     static func loadFromDisk(percentage percentage: UInt = FeatureService.percentage(), bundle: NSBundle = FeatureService.bundle, fileName: String = FeatureService.fileName) -> FeatureStore {
         let path = bundle.pathForResource(fileName, ofType: "json")!
@@ -27,6 +48,7 @@ internal struct FeatureParser {
         let nameKey = "name"
         let activeKey = "active"
         let sectionKey = "section"
+        let optionsKey = "options"
 
         var lowerCaseDictionary = dictionary
         lowerCaseDictionary.lowercaseKeys()
@@ -51,6 +73,11 @@ internal struct FeatureParser {
             section = .Some(name: sectionName)
         }
 
-        return Feature(name: name, rolloutPercentage: rolloutPercentage, platforms: platform, section: section, active: active)
+        var options: [String]? = nil
+        if let featureOptions = lowerCaseDictionary[optionsKey] as? [String] {
+            options = featureOptions
+        }
+
+        return Feature(name: name, rolloutPercentage: rolloutPercentage, platforms: platform, section: section, active: active, options: options)
     }
 }

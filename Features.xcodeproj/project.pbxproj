@@ -32,6 +32,7 @@
 		0AC6B0321D34D7B500456021 /* FeaturesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */; };
 		0AC6B0341D34D7C300456021 /* FeaturesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */; };
 		0AC87D621CDA674F00609BAD /* FeaturesObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */; };
+		0AFD6CED1D953F390049607D /* FeatureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD6CEC1D953F390049607D /* FeatureClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		0AC6B0311D34D7B500456021 /* FeaturesHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturesHeaderView.swift; sourceTree = "<group>"; };
 		0AC6B0331D34D7C300456021 /* FeaturesHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturesHeaderView.xib; sourceTree = "<group>"; };
 		0AC87D611CDA674F00609BAD /* FeaturesObjectiveCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesObjectiveCTests.m; sourceTree = "<group>"; };
+		0AFD6CEC1D953F390049607D /* FeatureClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				0A2D03AC1D33E357007C272E /* FeatureParser.swift */,
+				0AFD6CEC1D953F390049607D /* FeatureClient.swift */,
 				0A2D03B21D33E474007C272E /* FeaturePercentageStore.swift */,
 				0A0AB6701CD9244600F9C54B /* Feature.swift */,
 				0AA19D581D35992400ECE43B /* FeatureStore.swift */,
@@ -375,6 +378,7 @@
 				0A2D03D91D3406A9007C272E /* FeatureCell.swift in Sources */,
 				0A2D03AD1D33E357007C272E /* FeatureParser.swift in Sources */,
 				0AA19D591D35992400ECE43B /* FeatureStore.swift in Sources */,
+				0AFD6CED1D953F390049607D /* FeatureClient.swift in Sources */,
 				0A2D03CD1D33FA92007C272E /* FeaturesViewController.swift in Sources */,
 				0A2D03DB1D344253007C272E /* Platform.swift in Sources */,
 				0A0AB6431CD9214000F9C54B /* FeatureService.swift in Sources */,

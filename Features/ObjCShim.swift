@@ -25,4 +25,8 @@ public class FeatureServiceShim: NSObject {
         let feature = FeatureName(rawValue: featureName)
         return FeatureService.featureStore.isActive(feature)
     }
+
+    public static func updateFeatures(request: NSURLRequest) {
+        FeatureService.updateRemoteFeaturesWithRequest(request)
+    }
 }

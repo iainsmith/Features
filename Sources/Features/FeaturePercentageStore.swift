@@ -12,23 +12,23 @@ public protocol FeaturePercentageStore {
     var feature_storedPercentage: UInt? { get set }
 }
 
-extension NSUserDefaults: FeaturePercentageStore {
+extension UserDefaults: FeaturePercentageStore {
     private static let featurePercentageKey = "com.features.percentage"
 
     public var feature_storedPercentage: UInt? {
         get {
-            let value = integerForKey(NSUserDefaults.featurePercentageKey)
+            let value = integer(forKey: (UserDefaults.featurePercentageKey))
             guard value != 0 else { return nil }
             return UInt(value)
         }
 
         set {
-            let key = NSUserDefaults.featurePercentageKey
+            let key = UserDefaults.featurePercentageKey
 
             if let value = newValue {
-                setInteger(Int(value), forKey: key)
+                set(Int(value), forKey: key)
             } else {
-                removeObjectForKey(key)
+                removeObject(forKey: key)
             }
         }
     }

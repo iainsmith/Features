@@ -1,12 +1,19 @@
-Pod::Spec.new do |spec|
-  spec.name             = 'Features'
-  spec.version          = '0.3.0'
-  spec.license          = { :type => 'MIT' }
-  spec.homepage         = 'https://github.com/iainsmith/Features'
-  spec.authors          = { 'Iain Smith' => '' }
-  spec.summary          = 'Feature Flags for your app.'
-  spec.source           = { :git => 'https://github.com/iainsmith/features.git', :tag => 'v0.3.0' }
-  spec.source_files     = 'Features/*'
-  spec.requires_arc     = true
-  spec.ios.deployment_target = '8.0'
+Pod::Spec.new do |s|
+  s.name         = "Features"
+  s.version      = "0.3.0"
+  spec.summary   = 'Feature Flags for your app.'
+  s.description  = <<-DESC
+    Your description here.
+  DESC
+  s.homepage     = "git@github.com:iainsmith/Features"
+  s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.author             = { "Iain" => "iain@mountain23.com" }
+  s.social_media_url   = ""
+  s.ios.deployment_target = "8.0"
+  s.osx.deployment_target = "10.9"
+  s.watchos.deployment_target = "2.0"
+  s.tvos.deployment_target = "9.0"
+  s.source       = { :git => "git@github.com:iainsmith/Features.git", :tag => s.version.to_s }
+  s.source_files  = "Sources/**/*"
+  s.frameworks  = "Foundation"
 end

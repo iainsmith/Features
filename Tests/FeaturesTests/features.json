@@ -3,20 +3,19 @@
         "name": "First Feature",
         "active": true,
         "percentage": 30,
-        "platforms" : "iPhone"
+        "platforms" : ["iphone", "ipad"]
     },
     {
         "name": "Invalid feature",
-        "active": "true",
-        "platforms": "all"
+        "active": true,
+        "platforms": ["iphone", "ipad"]
     },
     {
-        "Name": "Second Feature",
+        "name": "Second Feature",
         "active": false
     },
     {
         "name": "Third Feature",
         "active": true,
-        "platforms": "iphone,ipad"
     }
 ]

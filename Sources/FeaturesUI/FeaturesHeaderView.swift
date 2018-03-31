@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import UIKit
+
+let iOSBundle = Bundle(for: FeaturesHeaderView.self)
 
 protocol FeaturesHeaderViewDelegate: AnyObject {
     func didUpdateDevicePercentage(percentage: UInt)
@@ -32,7 +35,7 @@ class FeaturesHeaderView: UIView {
     init(frame: CGRect, delegate: FeaturesHeaderViewDelegate?) {
         self.delegate = delegate
         super.init(frame: frame)
-        let view = NSBundle(forClass: self.dynamicType).loadNibNamed("FeaturesHeaderView", owner: self, options: nil).first as! UIView
+        let view = iOSBundle.loadNibNamed("FeaturesHeaderView", owner: self, options: nil)?.first as! UIView
         view.frame = frame
         self.addSubview(view)
     }
@@ -42,6 +45,6 @@ class FeaturesHeaderView: UIView {
     }
 
     @IBAction func didUpdatePercentage(sender: UIStepper) {
-        delegate?.didUpdateDevicePercentage(UInt(sender.value))
+        delegate?.didUpdateDevicePercentage(percentage: UInt(sender.value))
     }
 }

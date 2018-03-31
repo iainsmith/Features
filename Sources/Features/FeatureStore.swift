@@ -13,31 +13,25 @@ public struct FeatureStore {
     let devicePercentage: UInt
     let currentPlatform: Platform
 
-    init(features: [Feature], devicePercentage: UInt) {
+    init(features: [Feature], devicePercentage: UInt, platform: Platform) {
         self.features = features
         self.devicePercentage = devicePercentage
-        self.currentPlatform = Platform.currentDevice()
+        self.currentPlatform = platform
     }
 
-    public func isActive(featureName: FeatureName) -> Bool {
-        return isActive(featureName.rawValue)
+    public func isActive(_ featureName: FeatureName) -> Bool {
+        return isActive(name: featureName.rawValue)
     }
 
     internal func isActive(name: String) -> Bool {
-        let index = features.indexOf { feature -> Bool in
+        let index = features.index { feature -> Bool in
             feature.name == name
         }
 
         if let index = index {
             let feature = features[index]
 
-            let activeForUser: Bool
-            if let rolloutPercentage = feature.rolloutPercentage {
-                activeForUser = (devicePercentage <= rolloutPercentage)
-            } else {
-                activeForUser = true
-            }
-
+            let activeForUser: Bool = (devicePercentage <= feature.rolloutPercentage)
             let activePlatform = feature.platforms.contains(currentPlatform)
 
             return feature.active && activeForUser && activePlatform
@@ -48,7 +42,7 @@ public struct FeatureStore {
 
     func featureStoreByUpdatingFeature(feature: Feature) -> FeatureStore {
         var localFeaturs = features
-        let index = localFeaturs.indexOf { $0.name == feature.name }
+        let index = localFeaturs.index { $0.name == feature.name }
 
         if let index = index {
             localFeaturs[index] = feature
@@ -56,7 +50,7 @@ public struct FeatureStore {
             localFeaturs.append(feature)
         }
 
-        return FeatureStore(features: localFeaturs, devicePercentage: devicePercentage)
+        return FeatureStore(features: localFeaturs, devicePercentage: devicePercentage, platform: Platform.currentDevice())
     }
 }
 

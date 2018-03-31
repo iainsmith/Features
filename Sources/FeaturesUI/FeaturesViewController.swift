@@ -12,31 +12,22 @@ import UIKit
     func featuresViewControllerFinished(controller: FeaturesViewController)
 }
 
-public extension SequenceType {
-    func groupBy<U: Hashable>(@noescape keyFunc: Generator.Element -> U) -> [U:[Generator.Element]] {
-        var dict: [U:[Generator.Element]] = [:]
-        for el in self {
-            let key = keyFunc(el)
-            if case nil = dict[key]?.append(el) { dict[key] = [el] }
-        }
-        return dict
-    }
-}
-
+class BundleMarker {}
+let bundle = Bundle(for: BundleMarker.self)
 
 public class FeaturesViewController: UITableViewController {
-    var features: [Feature]? = nil
-    var groupedBy: [String: [Feature]]? = nil
+    var features: [Feature] = []
+    var groupedBy: [String: [Feature]] = [:]
     var headerView: FeaturesHeaderView? = nil
 
     weak var delegate: FeaturesViewControllerDelegate? = nil
 
     public convenience init(delegate: FeaturesViewControllerDelegate) {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
         self.delegate = delegate
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
     }
 
@@ -49,21 +40,18 @@ public class FeaturesViewController: UITableViewController {
     }
 
     public override func viewDidLoad() {
-        features = FeatureService.featureStore.features
-        groupedBy = features!.groupBy { feature in
-            return feature.section.name
-        }
+        let features = FeatureService.featureStore.features
+        groupedBy = Dictionary(grouping: features) { $0.section ?? "" }
 
         navigationItem.title = "Features"
 
         configureTableView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(didSelectSave))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didSelectSave))
     }
 
     private func configureTableView() {
-        let nib = UINib(nibName: "FeatureCell", bundle: NSBundle(forClass: self.dynamicType))
-        tableView.registerNib(nib, forCellReuseIdentifier: FeatureCell.reuseIdentifier)
-
+        let nib = UINib(nibName: "FeatureCell", bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: FeatureCell.reuseIdentifier)
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.allowsSelection = false
@@ -76,7 +64,7 @@ public class FeaturesViewController: UITableViewController {
     }
 
     @objc private func didSelectSave() {
-        delegate?.featuresViewControllerFinished(self)
+        delegate?.featuresViewControllerFinished(controller: self)
     }
 }
 
@@ -88,11 +76,11 @@ extension FeaturesViewController: FeaturesHeaderViewDelegate {
 }
 
 extension FeaturesViewController {
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(FeatureCell.reuseIdentifier, forIndexPath: indexPath) as! FeatureCell
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FeatureCell.reuseIdentifier, for: indexPath) as! FeatureCell
 
-        let key = keyForSection(indexPath.section)
-        let features = groupedBy![key]!
+        let key = keyForSection(index: indexPath.section)
+        let features = groupedBy[key]!
 
         let feature = features[indexPath.row]
         cell.nameLabel.text = feature.name
@@ -102,42 +90,43 @@ extension FeaturesViewController {
         return cell
     }
 
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let key = keyForSection(section)
-        return groupedBy![key]!.count
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let key = keyForSection(index: section)
+        return groupedBy[key]!.count
     }
 
-    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return groupedBy!.keys.count
+    public override func numberOfSections(in tableView: UITableView) -> Int {
+        return groupedBy.keys.count
     }
 
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return keyForSection(section)
+    public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return keyForSection(index: section)
     }
 }
 
 extension FeaturesViewController {
     private func keyForSection(index: Int) -> String {
-        let sortedKeys = groupedBy!.keys.sort()
+        let sortedKeys = groupedBy.keys.sorted()
         return sortedKeys[index]
     }
 
-    private func featureForIndexPath(indexPath: NSIndexPath) -> Feature {
-        let key = keyForSection(indexPath.section)
-        let features = groupedBy![key]!
+    private func featureForIndexPath(indexPath: IndexPath) -> Feature {
+        let key = keyForSection(index: indexPath.section)
+        let features = groupedBy[key]!
         return features[indexPath.row]
     }
 }
 
 extension FeaturesViewController: FeatureCellDelegate {
     func cell(cell: FeatureCell, setFeatureEnabled enabled: Bool) {
-        let index = tableView.indexPathForCell(cell)!
+        let index = tableView.indexPath(for: cell)!
 
-        let existingFeature = featureForIndexPath(index)
+        let existingFeature = featureForIndexPath(indexPath: index)
         let newFeature = Feature(name: existingFeature.name, rolloutPercentage: existingFeature.rolloutPercentage, platforms: existingFeature.platforms, section: existingFeature.section, active: enabled)
 
-        let newStore = FeatureService.featureStore.featureStoreByUpdatingFeature(newFeature)
+        let newStore = FeatureService.featureStore.featureStoreByUpdatingFeature(feature: newFeature)
         FeatureService.featureStore = newStore
         features = newStore.features
     }
 }
+

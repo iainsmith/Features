@@ -12,9 +12,9 @@ public typealias FeatureData = (name: String, active: Bool)
 
 public struct FeatureService {
     public static var fileName = "features"
-    public static var bundle = NSBundle.mainBundle()
+    public static var bundle = Bundle.main
     public static var overRidePercentage: UInt? = nil
-    public static var store: FeaturePercentageStore = NSUserDefaults.standardUserDefaults()
+    public static var store: FeaturePercentageStore = UserDefaults.standard
     public static var featureStore: FeatureStore = FeatureService.latestSavedStore()
     private static var remoteClient = FeatureClient()
 
@@ -22,26 +22,26 @@ public struct FeatureService {
     public static func featureDetails() -> [FeatureData] {
         return featureStore.features.map { feature in
             let name = feature.name
-            let active = featureStore.isActive(name)
+            let active = featureStore.isActive(FeatureName(rawValue: name))
             return (name: name, active: active)
         }
     }
 
-    public static func updatePercentage(percentage: UInt) {
+    public static func updatePercentage(_ percentage: UInt) {
         store.feature_storedPercentage = percentage
-        featureStore = FeatureStore(features: featureStore.features, devicePercentage: percentage)
+        featureStore = FeatureStore(features: featureStore.features, devicePercentage: percentage, platform: Platform.currentDevice())
     }
 
     public static func devicePercentage() -> UInt {
        return overRidePercentage ?? existingPercentage() ?? generatedSavedPercentage()
     }
 
-    public static func updateRemoteFeaturesWithRequest(request: NSURLRequest) {
-        remoteClient.updateFeatures(request) { result in
+    public static func updateRemoteFeaturesWithRequest(_ request: URLRequest) {
+        remoteClient.updateFeatures(request: request) { result in
             switch result {
-            case .Success(let store, let data):
-                saveAndUpdateFeatureStore(store, data: data)
-            case .Failure:
+            case .success(let store, let data):
+                saveAndUpdateFeatureStore(store: store, data: data)
+            case .failure:
                 print("failed to update features from request")
             }
         }
@@ -56,16 +56,17 @@ extension FeatureService {
 
     private static func latestRemoteStore() -> FeatureStore? {
         // Use strict mode so consumers are less likely to break things.
-        return FeatureParser.loadFromPath(remoteFilePath(), strict: true)
+        let url = URL(fileURLWithPath: remoteFilePath())
+        return FeatureParser.loadFromPath(url, strict: true)
     }
 
     private static func remoteFolderPath() -> String {
-        return NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
+        return NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
     }
 
     private static func remoteFilePath() -> String {
         var supportPath = remoteFolderPath()
-        supportPath.appendContentsOf("/features.json")
+        supportPath.append("/features.json")
         return supportPath
     }
 
@@ -73,22 +74,23 @@ extension FeatureService {
         return FeatureParser.loadFromDisk()
     }
 
-    private static func updateLatestJSONWithData(data: NSData) throws {
-        let fileManager = NSFileManager.defaultManager()
+    private static func updateLatestJSONWithData(data: Data) throws {
+        let fileManager = FileManager.default
         let folderPath = remoteFolderPath()
 
-        if fileManager.fileExistsAtPath(folderPath) == false {
-            try fileManager.createDirectoryAtPath(folderPath, withIntermediateDirectories: true, attributes: nil)
+        if fileManager.fileExists(atPath: folderPath) == false {
+            try fileManager.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: nil)
         }
 
         let filePath = remoteFilePath()
-        try data.writeToFile(filePath, options: [.DataWritingAtomic])
+        let url = URL(fileURLWithPath: filePath)
+        try data.write(to: url, options: [.atomicWrite])
         print("data saved to \(filePath)")
     }
 
-    private static func saveAndUpdateFeatureStore(store: FeatureStore, data: NSData) {
+    private static func saveAndUpdateFeatureStore(store: FeatureStore, data: Data) {
         do {
-            try updateLatestJSONWithData(data)
+            try updateLatestJSONWithData(data: data)
         } catch {
             print("failed to write features to disk")
         }
@@ -105,11 +107,5 @@ extension FeatureService {
         let percentage = RandomPercentageGenerator.generate()
         store.feature_storedPercentage = percentage
         return percentage
-    }
-}
-
-internal struct RandomPercentageGenerator {
-    static func generate() -> UInt {
-        return UInt(arc4random_uniform(100) + 1)
     }
 }

@@ -31,23 +31,23 @@ internal class FeatureCell: UITableViewCell {
     }
 
     @IBAction func updatedToggle(sender: UISwitch) {
-        featureActive = sender.on
-        delegate?.cell(self, setFeatureEnabled: featureActive)
+        featureActive = sender.isOn
+        delegate?.cell(cell: self, setFeatureEnabled: featureActive)
     }
 
     var featureActive: Bool {
         get {
-            return toggle.on
+            return toggle.isOn
         }
 
         set {
-            toggle.on = newValue
+            toggle.isOn = newValue
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         let totalIndentation = CGFloat(indentationLevel) * indentationWidth
-        contentView.frame = contentView.frame.edgeInset(UIEdgeInsets(top: 0, left: totalIndentation, bottom: 0, right: 0))
+        contentView.frame = contentView.frame.edgeInset(insets: UIEdgeInsets(top: 0, left: totalIndentation, bottom: 0, right: 0))
     }
 }

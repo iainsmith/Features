@@ -9,20 +9,24 @@
 import Foundation
 
 enum FeatureResult<T> {
-    case Success(T)
-    case Failure()
+    case success(T)
+    case failure()
 }
 
 class FeatureClient {
-    var session = NSURLSession.sharedSession()
+    let session: URLSession
 
-    func updateFeatures(request: NSURLRequest, completion: (FeatureResult<(FeatureStore, NSData)> -> Void)) {
-        session.dataTaskWithRequest(request) { data, response, error in
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+
+    func updateFeatures(request: URLRequest, completion: (@escaping (FeatureResult<(FeatureStore, Data)>) -> Void)) {
+        session.dataTask(with: request) { data, response, error in
             if let data = data {
                 let result = FeatureParser.loadFromData(data, strict: true)
                 completion(result)
             } else {
-                completion(.Failure())
+                completion(.failure())
             }
         }.resume()
     }

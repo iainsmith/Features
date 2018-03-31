@@ -15,31 +15,42 @@ extension FeatureName {
     @nonobjc static let Third = FeatureName(rawValue: "Third Feature")
 }
 
+class BundleMarker {}
+
+private let testBundle = Bundle(for: BundleMarker.self)
+
 class FeaturesServiceTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        FeatureService.bundle = NSBundle(forClass:self.dynamicType)
+        FeatureService.bundle = testBundle
         FeatureService.overRidePercentage = 30
     }
 
     func testLoadingFeaturesFromDifferentBundle() {
         let store = FeatureService.featureStore
-        XCTAssert(store.features.count == 3)
+        XCTAssert(store.features.count == 4)
         XCTAssertTrue(store.currentPlatform.contains(.iPhone))
     }
 
+    func testDecodingFeatureDefinitions() throws {
+        let json = testBundle.url(forResource: "features", withExtension: "json")!
+        let data = try Data(contentsOf: json)
+        let features = try JSONDecoder().decode([Feature].self, from: data)
+        XCTAssertNotNil(features)
+    }
+
     func testFeatures() {
-        FeatureService.bundle = NSBundle(forClass:self.dynamicType)
+        FeatureService.bundle = testBundle
         let store = FeatureService.featureStore
-        XCTAssert(store.features.count == 3)
+        XCTAssert(store.features.count == 4)
         XCTAssertTrue(store.isActive(.One))
-        XCTAssertTrue(isActive(.One))
-        XCTAssertFalse(isActive(.Second))
+        XCTAssertTrue(isActive(feature: .One))
+        XCTAssertFalse(isActive(feature: .Second))
 
         let secondFeature = store.features.filter { $0.name == FeatureName.Second.rawValue }.first!
         XCTAssertFalse(secondFeature.active)
-        XCTAssertTrue(secondFeature.rolloutPercentage == nil)
+        XCTAssertTrue(secondFeature.rolloutPercentage == 100)
     }
 
     func testMultiplePlatforms() {
@@ -54,13 +65,13 @@ class FeaturesServiceTests: XCTestCase {
         let firstFeature = FeatureName(rawValue: "Feature one")
         let secondFeature = FeatureName(rawValue: "Feature two")
 
-        let first = Feature(name: firstFeature.rawValue, rolloutPercentage: 30, platforms: .All, section: .None, active: true)
-        let second = Feature(name: secondFeature.rawValue, rolloutPercentage: 80, platforms: .All, section: .None, active: true)
+        let first = Feature(name: firstFeature.rawValue, rolloutPercentage: 30, platforms: .all, section: .none, active: true)
+        let second = Feature(name: secondFeature.rawValue, rolloutPercentage: 80, platforms: .all, section: .none, active: true)
 
         var stores: [FeatureStore] = []
         for _ in 1...10000 {
             let percentage = RandomPercentageGenerator.generate()
-            let store = FeatureStore(features: [first, second], devicePercentage: percentage)
+            let store = FeatureStore(features: [first, second], devicePercentage: percentage, platform: .iPhone)
             stores.append(store)
         }
 
